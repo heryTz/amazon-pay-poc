@@ -1,10 +1,12 @@
 <?php
-
 require '../vendor/autoload.php';
 
-$GLOBALS['private_key'] = 'path_to_private_key.pem';
-$GLOBALS['public_key'] = 'xxx';
-$GLOBALS['store_id'] = 'xxx';
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
+$dotenv->load();
+
+$GLOBALS['private_key'] = __DIR__ . '/../key/private.pem';
+$GLOBALS['public_key'] = $_ENV['PUBLIC_KEY'];
+$GLOBALS['store_id'] = $_ENV['STORE_ID'];
 
 function get_client()
 {
