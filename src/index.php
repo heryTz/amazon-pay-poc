@@ -1,33 +1,11 @@
 <?php
-require '../vendor/autoload.php';
-
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
-$dotenv->load();
-
-$GLOBALS['private_key'] = __DIR__ . '/../key/private.pem';
-$GLOBALS['public_key'] = $_ENV['PUBLIC_KEY'];
-$GLOBALS['store_id'] = $_ENV['STORE_ID'];
-$GLOBALS['merchant_id'] = $_ENV['MERCHANT_ID'];
-$GLOBALS['checkout_return_url'] = $_ENV['CHECKOUT_RETURN_URL'] .'/checkout_return_url.php';
-
-function get_client()
-{
-  $amazonpay_config = array(
-    'public_key_id' => $GLOBALS['public_key'],
-    'private_key'   => $GLOBALS['private_key'],
-    'region'        => 'EU',
-    'sandbox'       => true,
-    'algorithm' => 'AMZN-PAY-RSASSA-PSS-V2'
-  );
-
-  return new Amazon\Pay\API\Client($amazonpay_config);
-}
+require './base.php';
 
 function create_checkout_session_payload()
 {
   $payload = json_encode([
     'webCheckoutDetails' => [
-      'checkoutReviewReturnUrl' => $GLOBALS['checkout_return_url']
+      'checkoutReviewReturnUrl' => $GLOBALS['checkout_review_url']
     ],
     'storeId' => $GLOBALS['store_id'],
   ]);
