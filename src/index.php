@@ -7,6 +7,7 @@ $dotenv->load();
 $GLOBALS['private_key'] = __DIR__ . '/../key/private.pem';
 $GLOBALS['public_key'] = $_ENV['PUBLIC_KEY'];
 $GLOBALS['store_id'] = $_ENV['STORE_ID'];
+$GLOBALS['merchant_id'] = $_ENV['MERCHANT_ID'];
 
 function get_client()
 {
@@ -50,7 +51,7 @@ $ap_info = create_checkout_session_payload();
 <script type="text/javascript" charset="utf-8">
   const amazonPayButton = amazon.Pay.renderButton('#AmazonPayButton', {
     // set checkout environment
-    merchantId: 'merchant_id',
+    merchantId: '<?= $GLOBALS['merchant_id'] ?>',
     publicKeyId: '<?= $GLOBALS['public_key'] ?>',
     ledgerCurrency: 'EUR',
     // customize the buyer experience
