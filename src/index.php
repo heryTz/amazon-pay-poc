@@ -5,6 +5,7 @@ require '../vendor/autoload.php';
 $GLOBALS['private_key'] = 'path_to_private_key.pem';
 $GLOBALS['public_key'] = 'xxx';
 $GLOBALS['store_id'] = 'xxx';
+$GLOBALS['merchant_id'] = 'xx'
 
 function get_client()
 {
@@ -48,7 +49,7 @@ $ap_info = create_checkout_session_payload();
 <script type="text/javascript" charset="utf-8">
   const amazonPayButton = amazon.Pay.renderButton('#AmazonPayButton', {
     // set checkout environment
-    merchantId: 'merchant_id',
+    merchantId: '<?= $GLOBALS['merchant_id'] ?>',
     publicKeyId: '<?= $GLOBALS['public_key'] ?>',
     ledgerCurrency: 'EUR',
     // customize the buyer experience
